@@ -27,5 +27,5 @@ Java 17, Spring Boot 3.1.4. База данных PostgreSQL.
 Примеры документации:
 - Endpoint для получения списка валют на указанную дату
 ![](https://github.com/ParkhomenkoArtyom/exchange-rate-provider/raw/master/image/SwaggerDoc1.png)
-- Endpoint для получения информации о конткретной валюты на указанную дату по коду валюты
+- Endpoint для получения информации о конткретной валюте на указанную дату по коду валюты
 ![](https://github.com/ParkhomenkoArtyom/exchange-rate-provider/raw/master/image/SwaggerDoc2.png)
