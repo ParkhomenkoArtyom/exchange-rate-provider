@@ -24,3 +24,6 @@ Java 17, Spring Boot 3.1.4. База данных PostgreSQL.
 ## Документация к проекту.
 
 Документация сервиса выполнена с помощью Swagger. После запуска проекта открыть ее можно по ссылке http://localhost:8080/swagger-ui/index.html.
+Примеры документации:
+- Endpoint для получения списка валют на указанную дату
+![](https://github.com/ParkhomenkoArtyom750504/exchange-rate-provider/image/SwaggerDoc1.png)
