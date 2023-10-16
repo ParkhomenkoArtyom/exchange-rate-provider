@@ -3,8 +3,6 @@ package com.exchangerateprovider.service.rateService;
 import com.exchangerateprovider.entity.Rate;
 import com.exchangerateprovider.responseDto.RateResponseDto;
 
-import java.util.List;
-
 public interface RateService {
     void saveRatesInStorage(Rate[] rates);
     Rate[] getRatesOnRequestDate(String date);

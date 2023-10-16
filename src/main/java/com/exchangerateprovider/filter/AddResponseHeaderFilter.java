@@ -1,8 +1,6 @@
 package com.exchangerateprovider.filter;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
 import com.exchangerateprovider.util.CheckSumUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,6 +15,10 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * На каждый запрос по пути "/rate/**" добавляет
+ * в каждый заголовок CRC32 тела ответа
+ */
 @Component
 @WebFilter("/rate/**")
 @Slf4j

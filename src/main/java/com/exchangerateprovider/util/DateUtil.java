@@ -19,7 +19,7 @@ public class DateUtil {
 
     public static Boolean isValid(String date) {
         try {
-            LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("uuuu-MM-dd")
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("uuuu-MM-dd")
                     .withResolverStyle(ResolverStyle.STRICT));
             return true;
         } catch (DateTimeParseException e) {

@@ -2,7 +2,6 @@ package com.exchangerateprovider.service.rateService;
 
 import com.exchangerateprovider.entity.Currency;
 import com.exchangerateprovider.entity.Rate;
-import com.exchangerateprovider.exception.exceptions.ApiRequesterException;
 import com.exchangerateprovider.parser.ApiRateParser;
 import com.exchangerateprovider.repository.RateRepository;
 import com.exchangerateprovider.responseDto.RateResponseDto;

@@ -1,6 +1,5 @@
 package com.exchangerateprovider.requester;
 
-import com.exchangerateprovider.exception.GlobalExceptionHandler;
 import com.exchangerateprovider.exception.exceptions.ApiConnectionException;
 import com.exchangerateprovider.exception.exceptions.ApiRequesterException;
 import com.exchangerateprovider.util.DateUtil;
