@@ -40,7 +40,7 @@ public class RateServiceImpl implements RateService {
     }
 
     @Override
-    public Rate getRateFormApiByCodeAndDate(Integer code, String date) {
+    public Rate getRateFromApiByCodeAndDate(Integer code, String date) {
         return this.apiRateParser.getApiExchangeRateByCodeAndDate(code, date);
     }
 

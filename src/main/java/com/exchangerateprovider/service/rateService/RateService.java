@@ -7,7 +7,7 @@ public interface RateService {
     void saveRatesInStorage(Rate[] rates);
     Rate[] getRatesOnRequestDate(String date);
     Rate getRateFromStorageByCodeAndDate(Integer code, String date);
-    Rate getRateFormApiByCodeAndDate(Integer code, String date);
+    Rate getRateFromApiByCodeAndDate(Integer code, String date);
     RateResponseDto rateToDto(Rate rate);
     Boolean checkIfRatesExistsByDate(String date);
 }

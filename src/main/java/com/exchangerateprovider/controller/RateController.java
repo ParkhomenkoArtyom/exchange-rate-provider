@@ -1,6 +1,5 @@
 package com.exchangerateprovider.controller;
 
-import com.exchangerateprovider.entity.Rate;
 import com.exchangerateprovider.exception.ExceptionResponse;
 import com.exchangerateprovider.responseDto.RateResponseDto;
 import com.exchangerateprovider.service.currencyService.CurrencyService;
@@ -15,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import java.util.Objects;
 
 @Slf4j
 @Tag(name = "Курс валют", description = "Получение информации о курсах валют")
@@ -71,12 +71,11 @@ public class RateController {
     @GetMapping
     public RateResponseDto getCurrencyRate(@RequestParam @Parameter(description = "Дата курса валюты") String date,
                                            @RequestParam @Parameter(description = "Код валюты") Integer code) {
-        RateResponseDto rateResponseDto;
         log.info("Получение курса валюты, date:{}, code:{}", date, code);
-        Rate rate = rateService.getRateFromStorageByCodeAndDate(code, date);
-        if (rate == null)
-            rateResponseDto = rateService.rateToDto(rateService.getRateFormApiByCodeAndDate(code, date));
-        else rateResponseDto = rateService.rateToDto(rate);
+        RateResponseDto rateResponseDto = rateService.rateToDto(Objects.requireNonNullElseGet(
+                rateService.getRateFromStorageByCodeAndDate(code, date), () ->
+                        rateService.getRateFromApiByCodeAndDate(code, date))
+        );
         log.info("Полученный курс валюты, rate:{}", rateResponseDto);
         return rateResponseDto;
     }
