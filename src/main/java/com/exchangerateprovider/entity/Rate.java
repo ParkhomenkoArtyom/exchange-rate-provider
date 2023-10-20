@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Integer id;
 
     @Column(name = "code", nullable = false, updatable = false)

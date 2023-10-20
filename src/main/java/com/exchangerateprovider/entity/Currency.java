@@ -12,16 +12,17 @@ import lombok.Getter;
 public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Integer id;
 
     @JsonProperty("Cur_ID")
-    @Column(name = "code", nullable = false, updatable = false)
+    @Column(name = "code", nullable = false, updatable = false, unique = true)
     private Integer code;
 
     @JsonProperty("Cur_Name")
     @Column(name = "name", nullable = false, updatable = false)
     private String name;
+
     @JsonProperty("Cur_Abbreviation")
     @Column(name = "abbrev", nullable = false, updatable = false)
     private String abbrev;
@@ -29,5 +30,4 @@ public class Currency {
     @JsonProperty("Cur_Scale")
     @Column(name = "scale", nullable = false, updatable = false)
     private String scale;
-
 }
