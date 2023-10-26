@@ -1,7 +1,9 @@
 package com.exchangerateprovider.requester;
 
-public interface ApiExchangeRateRequester {
-    String getApiExchangeRateJson(String date);
-    String getApiExchangeRateByCodeAndDateJson(Integer code, String date);
+import com.exchangerateprovider.entity.Rate;
 
+import java.util.List;
+
+public interface ApiExchangeRateRequester {
+    List<Rate> getApiDataList(String requestUrl, Object... uriVariables);
 }

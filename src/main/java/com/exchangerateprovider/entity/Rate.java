@@ -1,13 +1,14 @@
 package com.exchangerateprovider.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import java.math.BigDecimal;
 
 @Entity
-@Getter
-@Setter
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "rate")
 public class Rate {
     @Id
@@ -15,26 +16,18 @@ public class Rate {
     @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Integer id;
 
+    @JsonProperty("Cur_ID")
     @Column(name = "code", nullable = false, updatable = false)
     private Integer code;
 
+    @JsonProperty("Date")
     @Column(name = "date", nullable = false, updatable = false)
     private String date;
 
+    @JsonProperty("Cur_OfficialRate")
     @Column(name = "rate", nullable = false, updatable = false)
     private BigDecimal rate;
 
     @Column(name = "rate_last_day", nullable = false, updatable = false)
     private BigDecimal rateLastDay;
-
-    public Rate(Integer code, String date, BigDecimal rate, BigDecimal rateLastDay) {
-        this.code = code;
-        this.date = date;
-        this.rate = rate;
-        this.rateLastDay = rateLastDay;
-
-    }
-
-    public Rate() {
-    }
 }

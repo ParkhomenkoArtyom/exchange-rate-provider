@@ -1,7 +1,7 @@
 package com.exchangerateprovider.filter;
 
 import java.io.IOException;
-import com.exchangerateprovider.util.CheckSumUtil;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -15,12 +15,14 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static com.exchangerateprovider.util.CheckSumUtil.getChecksumCRC32;
+
 /**
  * На каждый запрос по пути "/rate/**" добавляет
  * в каждый заголовок CRC32 тела ответа
  */
 @Component
-@WebFilter("/rate/**")
+@WebFilter
 @Slf4j
 public class AddResponseHeaderFilter extends OncePerRequestFilter {
     @Override
@@ -35,7 +37,7 @@ public class AddResponseHeaderFilter extends OncePerRequestFilter {
 
         byte[] responseBody = responseWrapper.getContentAsByteArray();
 
-        responseWrapper.addHeader("Digest", String.valueOf(CheckSumUtil.getChecksumCRC32(responseBody)));
+        responseWrapper.addHeader("Digest", String.valueOf(getChecksumCRC32(responseBody)));
         responseWrapper.copyBodyToResponse();
     }
 }

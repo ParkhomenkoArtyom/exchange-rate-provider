@@ -1,40 +1,32 @@
 package com.exchangerateprovider.requester;
 
-import com.exchangerateprovider.exception.exceptions.ApiConnectionException;
-import com.exchangerateprovider.exception.exceptions.ApiRequesterException;
-import com.exchangerateprovider.util.DateUtil;
+import com.exchangerateprovider.entity.Rate;
+import com.exchangerateprovider.exception.ApiConnectionException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import com.exchangerateprovider.constants.Constants;
+
+import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ApiExchangeRateRequesterImpl implements ApiExchangeRateRequester {
-    RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     @Override
-    public String getApiExchangeRateJson(String date) {
-        if (!DateUtil.isValid(date))
-            throw new ApiRequesterException("Ошибка получения списка курсов валют через API");
+    public List<Rate> getApiDataList(String requestUrl, Object... uriVariables) {
         try {
-            return restTemplate.getForObject(Constants.API_RATE_REQUEST_URL, String.class, date);
+            return restTemplate.exchange(
+                    requestUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<Rate>>() {
+                    },
+                    uriVariables).getBody();
         } catch (Exception e) {
-            throw new ApiConnectionException("Ошибка соединения с API");
-        }
-    }
-
-    @Override
-    public String getApiExchangeRateByCodeAndDateJson(Integer code, String date) {
-        if (!DateUtil.isValid(date))
-            throw new ApiRequesterException("Ошибка получения курса валюты через API");
-        try {
-            return restTemplate
-                    .getForObject(
-                            Constants.API_RATE_REQUEST_BY_CODE_URL,
-                            String.class, code,
-                            DateUtil.getPreviousDay(date), date
-                    );
-        } catch (Exception e) {
-            throw new ApiConnectionException("Ошибка соединения с API");
+            throw new ApiConnectionException("API connection error");
         }
     }
 }
